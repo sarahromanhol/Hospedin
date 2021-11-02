@@ -6,6 +6,10 @@ export const HotelDetailsContainer = styled.div`
     grid-template-columns: 560px 270px;
     grid-template-rows: 330px;
     column-gap: 100px;
+
+    #mais {
+        display: none;
+    }
 `
 
 export const HotelName = styled.p`
@@ -38,6 +42,7 @@ export const ExpandirDescricao = styled.div`
     align-items: center;
     justify-content: space-between;
     width: 170px;
+    cursor: pointer;
     p{
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         font-size: 12px;
