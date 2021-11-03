@@ -1,13 +1,13 @@
-import { HotelDetailsContainer, HotelName, HotelDescription, ExpandirDescricao, ComodidadesHotel, ComodidadesList, ComodidadeItem, MapaInfoContainer, RectangleBlue, RectangleMapa, VisualizarNoMapaContainer, AdressText, CheckInInfoContainer } from './styledDetails'
-import arrow from '../../assets/imgs/Vectorarrow.png'
-import wifi from '../../assets/imgs/wifi.png'
-import piscina from '../../assets/imgs/piscina.png'
-import recepcao from '../../assets/imgs/recepcao.png'
-import restaurante from '../../assets/imgs/restaurante.png'
-import toalha from '../../assets/imgs/toalha.png'
-import mapaIcone from '../../assets/imgs/mapa.png'
-import rectangleBlue from '../../assets/imgs/RectangleBlue.png'
-import rectangleMapa from '../../assets/imgs/mapaFoto.png'
+import { HotelDetailsContainer, HotelName, HotelDescription, ExpandirDescricao, ComodidadesHotel, ComodidadesList, ComodidadeItem, MapaInfoContainer, RectangleBlue, RectangleMapa, VisualizarNoMapaContainer, AdressText, CheckInInfoContainer } from './styled.js'
+import arrow from '../../../assets/imgs/Vectorarrow.png'
+import wifi from '../../../assets/imgs/wifi.png'
+import piscina from '../../../assets/imgs/piscina.png'
+import recepcao from '../../../assets/imgs/recepcao.png'
+import restaurante from '../../../assets/imgs/restaurante.png'
+import toalha from '../../../assets/imgs/toalha.png'
+import mapaIcone from '../../../assets/imgs/mapa.png'
+import rectangleBlue from '../../../assets/imgs/RectangleBlue.png'
+import rectangleMapa from '../../../assets/imgs/mapaFoto.png'
 
 
 export const HotelPageDetails = () => {
@@ -36,8 +36,7 @@ export const HotelPageDetails = () => {
                 de Brasília. Os quartos dispõem de ar-condicionado, e o Wi-Fi <span id='pontos'>...</span>
                 <span id='mais'>Lorem ipsum pulvinar nibh gravida tellus lobortis molestie varius donec, sit purus
                 felis semper interdum libero vulputate cras, vitae enim quisque pretium est urna duis amet.
-                phasellus vivamus sodales id dapibus malesuada ante id, porta egestas quisque magna feugiat quisque, 
-                convallis ultrices faucibus sollicitudin aliquet cubilia. velit torquent sem, vivamus. </span>
+                phasellus vivamus sodal </span>
                 </HotelDescription>
                 <ExpandirDescricao onClick={ExpandirTexto} id='btnExpandir'>
                     <img src={arrow} />
