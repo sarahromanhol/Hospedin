@@ -126,6 +126,7 @@ export const RectangleMapa = styled.img`
     position: absolute;
     top: 71px;
     left: 863px;
+    cursor: pointer;
 `
 
 export const VisualizarNoMapaContainer = styled.div`
@@ -139,6 +140,7 @@ export const VisualizarNoMapaContainer = styled.div`
     height: 32px;
     background-color: #FFFFFF;
     border-radius: 100px;
+    cursor: pointer;
 
     p{
         margin-left: 8px;
