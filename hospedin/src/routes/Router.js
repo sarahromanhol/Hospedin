@@ -13,7 +13,7 @@ export const Router = () => {
                 <Route exact path='/'>
                     <HotelPage />
                 </Route>
-                <Route exact path='/purchase/:id/:price'>
+                <Route exact path='/purchase/:id'>
                     <PurchasePage />
                 </Route>
                 <Route exact path='/concluded'>
