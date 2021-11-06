@@ -1,6 +1,9 @@
-import react from "react";
 import illustration from '../../assets/imgs/illustrationfinalPage.png'
-import {FinalPageContainer, Title, Body} from './styled'
+import {
+    FinalPageContainer,
+    Title,
+    Body
+} from './styled'
 
 export const FinalPage = () => {
     return(

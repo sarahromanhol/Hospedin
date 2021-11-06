@@ -29,7 +29,6 @@ export const HotelPage = () => {
         setShowInfo(prevState => !prevState)
         setSelectedItemId(itemId)
         setChangeArrow(prevState => !prevState)
-        console.log(showInfo)
     }
     
 
