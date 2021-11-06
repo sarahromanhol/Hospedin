@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useState, useContext } from 'react'
+import { GlobalContext } from '../../contexts/GlobalContext'
 import { useHistory } from 'react-router'
-import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { getRooms } from '../../services/requests'
 import { goToPurchasePage } from '../../routes/coordinator'
@@ -12,9 +12,9 @@ import users from '../../assets/imgs/users.png'
 import check from '../../assets/imgs/fe-check-circle.png'
 import {
     HotelPageContainer,
-    IconeUsers, 
+    IconeUsers,
     BodyInfoRoom,
-    Room, 
+    Room,
     AmmenitiesTable,
     Ammenity,
     DetailsTitle,
@@ -32,27 +32,29 @@ import {
     ReservationDateContainer
 } from './styled'
 
+
+
 export const HotelPage = () => {
     const history = useHistory()
-    const [rooms, setRooms] = useState([])
     const [showInfo, setShowInfo] = useState(false)
     const [selectedItemId, setSelectedItemId] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
     const [changeArrow, setChangeArrow] = useState(false)
-    const [selectedFirstDate, setSelectedFirstDate] = useState(null)
-    const [selectedSecondDate, setSelectedSecondDate] = useState(null)
-
-    // useEffect(() => {
-    //     getRooms(setRooms)
-    // }, [])
+    const {states, setters} = useContext(GlobalContext)
+    const {selectedFirstDate, selectedSecondDate} = states
+    const {setSelectedFirstDate, setSelectedSecondDate, setRoomPrice} = setters
+    const [rooms, setRooms] = useState([])
+    
 
     const CallRooms = (date) => {
         setSelectedSecondDate(date)
-        getRooms(setRooms)
+        getRooms(setRooms, setIsLoading)
     }
 
     //passando por params o nome e preço do quarto selecionado
     const bookRoom = (nome, preco) => {
-        goToPurchasePage(history, nome, preco)
+        setRoomPrice(preco)
+        goToPurchasePage(history, nome)
     }
 
     //função que controla o botão de mais informações do quarto
@@ -67,7 +69,7 @@ export const HotelPage = () => {
         return (
             <Room key={room.name}>
                 <MainInfo>
-                    <RoomPicture src={room.picture_url} />
+                    <RoomPicture src={room.picture_url} alt='Foto do quarto' />
                     <p>{room.name}</p>
                     <p>R$ {room.amount.toFixed(2)}</p>
                     <div>
@@ -92,7 +94,7 @@ export const HotelPage = () => {
                                 {room.amenities.map((ammenity) => {
                                     return (
                                         <Ammenity key={ammenity}>
-                                            <img src={check} />
+                                            <img src={check} alt='ícone check'/>
                                             <DetailsBody>{ammenity}</DetailsBody>
                                         </Ammenity>
                                     )
@@ -103,7 +105,7 @@ export const HotelPage = () => {
                 )}
 
                 <MoreInfoButton onClick={() => maisInfo(index)}>
-                    <img src={changeArrow ? arrowUp : arrowDown} />
+                    <img src={changeArrow ? arrowUp : arrowDown} alt='ícone seta'/>
                     <p>Mais informações</p>
                 </MoreInfoButton>
             </Room>
@@ -116,20 +118,14 @@ export const HotelPage = () => {
             <HotelPageReservation>
                 <ReservationDateContainer>
                     <h4>Reserve a sua acomodação</h4>
-                    {/* <DatePickerContainer>
-                        <p>Dom, 17 Nov</p>
-                        <img src={arrowDown} />
-                        <p>Ter, 19 Nov</p>
-                        <img src={arrowDown} />
-                        <img src={calendar} />
-                    </DatePickerContainer> */}
                     <DatePickerContainer>
                         <IndividualDatePicker>
                             <StyledDatePicker
                                 selected={selectedFirstDate}
                                 onChange={date => setSelectedFirstDate(date)}
                                 minDate={new Date()}
-                                dateFormat='dd/MM/yyyy'
+                                dateFormat="MMM dd, yyyy"
+                                placeholderText="Check in"
                             />
                             <img src={arrowDown} />
                         </IndividualDatePicker>
@@ -138,16 +134,12 @@ export const HotelPage = () => {
                                 selected={selectedSecondDate}
                                 minDate={selectedFirstDate}
                                 onChange={date => CallRooms(date)}
-                                dateFormat='dd/MM/yyyy'
+                                dateFormat="MMM dd, yyyy"
+                                placeholderText="Check out"
                             />
                             <img src={arrowDown} />
                         </IndividualDatePicker>
                         <img src={calendar} />
-                        {/* <p>Dom, 17 Nov</p>
-                        <img src={arrowDown} />
-                        <p>Ter, 19 Nov</p>
-                        <img src={arrowDown} />
-                        <img src={calendar} /> */}
                     </DatePickerContainer>
                 </ReservationDateContainer>
                 <ReservationRoomContainer>
@@ -156,7 +148,7 @@ export const HotelPage = () => {
                         <PrecoPorNoite>Preço por noite</PrecoPorNoite>
                         <p>Capacidade</p>
                     </TableLables>
-                    {renderRoomDetails}
+                    {isLoading ? <p>Aguarde, carregando...</p> : renderRoomDetails}
                 </ReservationRoomContainer>
             </HotelPageReservation>
         </HotelPageContainer>
